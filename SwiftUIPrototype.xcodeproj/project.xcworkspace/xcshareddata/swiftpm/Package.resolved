@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Alamofire",
+        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
+        "state": {
+          "branch": "feature/initial-combine-support",
+          "revision": "43f9ebf03413baf1782d7516b4f475f98723cd02",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
