@@ -9,7 +9,7 @@
 import Combine
 import Foundation
 
-final class AppState: ObservableObject {
+final class SheetState: ObservableObject {
     @Published var needsCity = false
     @Published var city = "Detroit, MI"
     @Published var needsState = false

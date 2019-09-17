@@ -1,43 +1,26 @@
 //
-//  ContentView.swift
+//  HTTPBinView.swift
 //  SwiftUIPrototype
 //
-//  Created by Jon Shier on 9/15/19.
+//  Created by Jon Shier on 9/16/19.
 //  Copyright © 2019 Jon Shier. All rights reserved.
 //
 
 import Alamofire
-import Combine
 import SwiftUI
 
-struct ContentView: View {
-    @EnvironmentObject var appState: AppState
-    
+struct HTTPBinView: View {
     @State var isPerformingRequest = false
     @State var selectedRequest: SampleRequest?
     
     var body: some View {
         VStack {
-            VStack {
-                ForEach(SampleRequest.samples, id: \.self) { request in
-                    RequestView(request: request)
-                        .onTapGesture { self.selectedRequest = request }
-                        .sheet(item: self.$selectedRequest, onDismiss: { self.selectedRequest = nil }) { toPerform in
-                            self.responseView(request: toPerform)
-                        }
-                }
-            }
-            Button(action: { self.appState.needsCity = true }) {
-                Text("Set City")
-            }
-            .sheet(isPresented: $appState.needsCity, onDismiss: { self.appState.needsCity = false }) {
-                LoginView(city: self.$appState.city)
-            }
-            Button(action: { self.appState.needsState = true }) {
-                Text("Set State")
-            }
-            .sheet(isPresented: $appState.needsState, onDismiss: { self.appState.needsState = false }) {
-                LoginView(city: self.$appState.state)
+            ForEach(SampleRequest.samples, id: \.self) { request in
+                RequestView(request: request)
+                    .onTapGesture { self.selectedRequest = request }
+                    .sheet(item: self.$selectedRequest, onDismiss: { self.selectedRequest = nil }) { toPerform in
+                        self.responseView(request: toPerform)
+                    }
             }
         }
     }
@@ -51,10 +34,9 @@ struct ContentView: View {
     }
 }
 
-struct ContentViewPreviews: PreviewProvider {
+struct HTTPBinView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-            .environmentObject(AppState())
+        HTTPBinView()
     }
 }
 

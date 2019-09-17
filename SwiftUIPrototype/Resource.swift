@@ -37,10 +37,10 @@ final class Resource<Success, Failure: Error>: ObservableObject {
     }
 }
 
-extension Resource where Success == HTTPBinResponse, Failure == AFError {
+extension Resource where Success: Decodable, Failure == AFError {
     func perform(_ request: URLRequestConvertible) {
         startLoading()
-        AF.request(request).responseDecodable(of: HTTPBinResponse.self) { self.update($0.result); self.isLoading = false }
+        AF.request(request).responseDecodable(of: Success.self) { self.update($0.result); self.isLoading = false }
     }
 }
 
