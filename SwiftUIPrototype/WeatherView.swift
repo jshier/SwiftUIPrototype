@@ -11,17 +11,17 @@ import SwiftUI
 
 struct WeatherView: View {
     @ObservedObject var currentWeather = Resource<Weather, AFError>()
-    @State var secret: Binding<String>?
+    @State var secret: String?
     
     var body: some View {
         VStack {
-            if currentWeather.value != nil {
-                Text(currentWeather.value!.currently.temperature.temperatureFormatted)
-            } else if currentWeather.error != nil {
-                Text("Oops! Failed to get weather due to error: \(currentWeather.error!.localizedDescription)")
-                        .lineLimit(10)
-            } else {
-                Text("Getting weather!")
+            currentWeather.value.map { (weather: Weather) in
+                RightNowView(weather: weather)
+            }
+            currentWeather.error.map { (error: AFError) in
+                VStack {
+                    Text("Oops! Failed to get weather due to error: \(error.localizedDescription)")
+                }
             }
             Button(action: {
                 self.currentWeather.perform(WeatherRequest(secret: ""))
@@ -30,18 +30,60 @@ struct WeatherView: View {
     }
 }
 
+struct RightNowView: View {
+    let weather: Weather
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            VStack(alignment: .leading) {
+                Text("Right now")
+                    .font(.largeTitle)
+                Text(weather.minutely.summary)
+                    .lineLimit(nil)
+                    .font(.subheadline)
+            }
+            HStack {
+                Image(systemName: "cloud.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 75, height: 75)
+                    .padding(.horizontal, 5)
+                    .foregroundColor(.gray)
+                VStack {
+                    Text(weather.currently.temperature.temperatureFormatted)
+                    Text("Feels like \(weather.currently.apparentTemperature.temperatureFormatted)")
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 8)
+    }
+}
+
 struct WeatherViewPreviews: PreviewProvider {
+    static let sampleWeather = Weather(currently: .init(temperature: 77, apparentTemperature: 75),
+                                       minutely: .init(summary: "Light rain stopping in 13 min., starting again 30 min. later."))
+    
     static var previews: some View {
-        WeatherView()
+        Group {
+            WeatherView()
+            RightNowView(weather: sampleWeather)
+        }
     }
 }
 
 struct Weather: Decodable {
     struct Current: Decodable {
         let temperature: Double
+        let apparentTemperature: Double
+    }
+    
+    struct Minutely: Decodable {
+        let summary: String
     }
     
     let currently: Current
+    let minutely: Minutely
 }
 
 extension Double {
@@ -51,7 +93,14 @@ extension Double {
 }
 
 enum Formatters {
-    static let temperature = MeasurementFormatter()
+    static let temperature: MeasurementFormatter = {
+        let formatter = MeasurementFormatter()
+        let numberFormatter = NumberFormatter()
+        numberFormatter.maximumFractionDigits = 0
+        formatter.numberFormatter = numberFormatter
+        
+        return formatter
+    }()
 }
 
 //42.657391, -83.194097
