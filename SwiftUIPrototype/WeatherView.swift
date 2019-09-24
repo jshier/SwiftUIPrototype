@@ -16,7 +16,11 @@ struct WeatherView: View {
     var body: some View {
         VStack {
             currentWeather.value.map { (weather: Weather) in
-                RightNowView(weather: weather)
+                VStack {
+                    RightNowView(weather: weather)
+                    TodayView(weather: weather)
+                    WeekView(weather: weather)
+                }
             }
             currentWeather.error.map { (error: AFError) in
                 VStack {
@@ -39,8 +43,8 @@ struct RightNowView: View {
                 Text("Right now")
                     .font(.largeTitle)
                 Text(weather.minutely.summary)
-                    .lineLimit(nil)
-                    .font(.subheadline)
+                    .lineLimit(2)
+                    .font(.footnote)
             }
             HStack {
                 Image(systemName: "cloud.fill")
@@ -60,14 +64,88 @@ struct RightNowView: View {
     }
 }
 
+struct TodayView: View {
+    let weather: Weather
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Today")
+                .font(.largeTitle)
+            Text(weather.hourly.summary)
+                .lineLimit(2)
+                .font(.footnote)
+            TemperatureGraph(data: Array(weather.hourly.data.prefix(8)))
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 8)
+    }
+}
+
+struct TemperatureGraph: View {
+    let data: [Weather.Hourly.Datapoint]
+    
+    var body: some View {
+        HStack(spacing: 2) {
+            ForEach(data.indices) { index in
+                GraphBar(index: index, value: "\(self.data[index].temperature.temperatureFormatted)", height: 100)
+            }
+        }
+    }
+}
+
+struct GraphBar: View {
+    var index: Int
+    var value: String
+    var height: CGFloat
+    
+    var body: some View {
+        ZStack {
+            Rectangle()
+                .fill(Color.purple)
+                .frame(height: height, alignment: .bottom)
+                .cornerRadius(2)
+                .overlay(Text(value)
+                            .foregroundColor(.white)
+                            .frame(alignment: .top)
+                            .padding(.horizontal, 2)
+                            .padding(.top, 2),
+                         alignment: .top)
+            
+        }
+        
+    }
+}
+
+struct WeekView: View {
+    let weather: Weather
+    
+    var body: some View {
+        VStack {
+            Text("This Week")
+        }
+    }
+}
+
 struct WeatherViewPreviews: PreviewProvider {
+    static let datapoints: [Weather.Hourly.Datapoint] = [
+    .init(time: 1509991200, temperature: 77, apparentTemperature: 75),
+    .init(time: 1509991200, temperature: 77, apparentTemperature: 75),
+    .init(time: 1509991200, temperature: 77, apparentTemperature: 75),
+    .init(time: 1509991200, temperature: 77, apparentTemperature: 75)
+    ]
     static let sampleWeather = Weather(currently: .init(temperature: 77, apparentTemperature: 75),
-                                       minutely: .init(summary: "Light rain stopping in 13 min., starting again 30 min. later."))
+                                       minutely: .init(summary: "Light rain stopping in 13 min., starting again 30 min. later. Light rain stopping in 13 min., starting again 30 min. later."),
+                                       hourly: .init(summary: "Rain starting later this afternoon, continuing until this evening.",
+                                                     data: datapoints))
     
     static var previews: some View {
         Group {
             WeatherView()
             RightNowView(weather: sampleWeather)
+            TodayView(weather: sampleWeather)
+            WeekView(weather: sampleWeather)
+            GraphBar(index: 0, value: "100°", height: 100)
+            
         }
     }
 }
@@ -82,8 +160,19 @@ struct Weather: Decodable {
         let summary: String
     }
     
+    struct Hourly: Decodable {
+        let summary: String
+        let data: [Datapoint]
+        struct Datapoint: Decodable {
+            let time: Int
+            let temperature: Double
+            let apparentTemperature: Double
+        }
+    }
+    
     let currently: Current
     let minutely: Minutely
+    let hourly: Hourly
 }
 
 extension Double {
