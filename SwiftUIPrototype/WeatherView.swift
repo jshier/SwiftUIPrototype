@@ -15,6 +15,9 @@ struct WeatherView: View {
     
     var body: some View {
         VStack {
+            if currentWeather.isLoading {
+                Text("Loading...")
+            }
             currentWeather.value.map { (weather: Weather) in
                 VStack {
                     RightNowView(weather: weather)
@@ -28,7 +31,7 @@ struct WeatherView: View {
                 }
             }
             Button(action: {
-                self.currentWeather.perform(WeatherRequest(secret: ""))
+                self.currentWeather.perform(WeatherRequest(secret: "e0e9c10dd23348debddd2a058f2ebbd0"))
             }, label: { Text("Refresh") })
         }
     }
@@ -74,7 +77,7 @@ struct TodayView: View {
             Text(weather.hourly.summary)
                 .lineLimit(2)
                 .font(.footnote)
-            TemperatureGraph(data: Array(weather.hourly.data.prefix(8)))
+            TemperatureGraph(data: Array(weather.hourly.data))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(.horizontal, 8)
@@ -85,13 +88,34 @@ struct TemperatureGraph: View {
     let data: [Weather.Hourly.Datapoint]
     
     var body: some View {
-        HStack(spacing: 2) {
-            ForEach(data.indices) { index in
-                GraphBar(index: index, value: "\(self.data[index].temperature.temperatureFormatted)", height: 100)
+        let first16 = Array(data.prefix(16))
+        let maxTemp = first16.map { $0.temperature }.max()!
+        let heights = first16.map { $0.temperature / maxTemp * 100 }
+        let halves = [data.indices[..<8], data.indices[8...]]
+        
+        return ScrollView(.horizontal, showsIndicators: false) {
+            ForEach(halves) { segment in
+                HStack(alignment: .bottom, spacing: 2) {
+                    ForEach(data.indices) { index in
+                        GraphBar(index: index, value: "\(self.data[index].temperature.temperatureFormatted)", height: CGFloat(heights[index]))
+                    }
+                }
             }
-        }
+//            HStack(alignment: .bottom, spacing: 2) {
+//                ForEach(data.indices) { index in
+//                    GraphBar(index: index, value: "\(self.data[index].temperature.temperatureFormatted)", height: CGFloat(heights[index]))
+//                }
+            }
+//        }
+//        HStack(alignment: .bottom, spacing: 2) {
+//            ForEach(data.indices) { index in
+//                GraphBar(index: index, value: "\(self.data[index].temperature.temperatureFormatted)", height: CGFloat(heights[index]))
+//            }
+//        }
     }
 }
+
+
 
 struct GraphBar: View {
     var index: Int
@@ -99,7 +123,6 @@ struct GraphBar: View {
     var height: CGFloat
     
     var body: some View {
-        ZStack {
             Rectangle()
                 .fill(Color.purple)
                 .frame(height: height, alignment: .bottom)
@@ -108,10 +131,10 @@ struct GraphBar: View {
                             .foregroundColor(.white)
                             .frame(alignment: .top)
                             .padding(.horizontal, 2)
-                            .padding(.top, 2),
+                            .padding(.top, 2)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.25),
                          alignment: .top)
-            
-        }
         
     }
 }
@@ -128,10 +151,22 @@ struct WeekView: View {
 
 struct WeatherViewPreviews: PreviewProvider {
     static let datapoints: [Weather.Hourly.Datapoint] = [
-    .init(time: 1509991200, temperature: 77, apparentTemperature: 75),
-    .init(time: 1509991200, temperature: 77, apparentTemperature: 75),
-    .init(time: 1509991200, temperature: 77, apparentTemperature: 75),
-    .init(time: 1509991200, temperature: 77, apparentTemperature: 75)
+    .init(time: 1509991200, temperature: 80, apparentTemperature: 75),
+    .init(time: 1509991201, temperature: 77, apparentTemperature: 75),
+    .init(time: 1509991202, temperature: 75, apparentTemperature: 75),
+    .init(time: 1509991203, temperature: 70, apparentTemperature: 75),
+    .init(time: 1509991204, temperature: 85, apparentTemperature: 75),
+    .init(time: 1509991205, temperature: 79, apparentTemperature: 75),
+    .init(time: 1509991206, temperature: 74, apparentTemperature: 75),
+    .init(time: 1509991207, temperature: 70, apparentTemperature: 75),
+    .init(time: 1509991208, temperature: 80, apparentTemperature: 75),
+    .init(time: 1509991209, temperature: 77, apparentTemperature: 75),
+    .init(time: 1509991210, temperature: 75, apparentTemperature: 75),
+    .init(time: 1509991211, temperature: 70, apparentTemperature: 75),
+    .init(time: 1509991212, temperature: 85, apparentTemperature: 75),
+    .init(time: 1509991213, temperature: 79, apparentTemperature: 75),
+    .init(time: 1509991214, temperature: 74, apparentTemperature: 75),
+    .init(time: 1509991215, temperature: 70, apparentTemperature: 75)
     ]
     static let sampleWeather = Weather(currently: .init(temperature: 77, apparentTemperature: 75),
                                        minutely: .init(summary: "Light rain stopping in 13 min., starting again 30 min. later. Light rain stopping in 13 min., starting again 30 min. later."),
@@ -173,6 +208,10 @@ struct Weather: Decodable {
     let currently: Current
     let minutely: Minutely
     let hourly: Hourly
+}
+
+extension Weather.Hourly.Datapoint: Identifiable {
+    var id: Int { time }
 }
 
 extension Double {
