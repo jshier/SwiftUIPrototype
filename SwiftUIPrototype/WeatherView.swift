@@ -94,10 +94,12 @@ struct TemperatureGraph: View {
         let halves = [data.indices[..<8], data.indices[8...]]
         
         return ScrollView(.horizontal, showsIndicators: false) {
-            ForEach(halves) { segment in
+            ForEach(halves, id: \.self) { segment in
                 HStack(alignment: .bottom, spacing: 2) {
-                    ForEach(data.indices) { index in
-                        GraphBar(index: index, value: "\(self.data[index].temperature.temperatureFormatted)", height: CGFloat(heights[index]))
+                    ForEach(self.data.indices) { index in
+                        GraphBar(index: index,
+                                 value: "\(self.data[index].temperature.temperatureFormatted)",
+                                height: CGFloat(heights[index]))
                     }
                 }
             }
