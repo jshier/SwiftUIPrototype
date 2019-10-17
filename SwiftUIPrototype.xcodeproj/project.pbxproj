@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		316F1F7E2358DE5400709C43 /* NavigationExperiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316F1F7D2358DE5400709C43 /* NavigationExperiments.swift */; };
 		31C8A176232F032800AF7B65 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C8A175232F032800AF7B65 /* LoginView.swift */; };
 		31C8A178232F052300AF7B65 /* SheetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C8A177232F052300AF7B65 /* SheetState.swift */; };
 		31FBF2B9232DFE32005956DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FBF2B8232DFE32005956DC /* AppDelegate.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		316F1F7D2358DE5400709C43 /* NavigationExperiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationExperiments.swift; sourceTree = "<group>"; };
 		31C8A175232F032800AF7B65 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		31C8A177232F052300AF7B65 /* SheetState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetState.swift; sourceTree = "<group>"; };
 		31FBF2B5232DFE32005956DC /* SwiftUIPrototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIPrototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,6 +121,7 @@
 			children = (
 				31FFCA6623307347007A8976 /* HTTPBinView.swift */,
 				31C8A175232F032800AF7B65 /* LoginView.swift */,
+				316F1F7D2358DE5400709C43 /* NavigationExperiments.swift */,
 				31FDC525232ED509002955AB /* RequestView.swift */,
 				31FBF2E8232DFEA9005956DC /* Resource.swift */,
 				31FDC52A232EDC66002955AB /* ResponseView.swift */,
@@ -323,6 +326,7 @@
 				31FBF2E9232DFEA9005956DC /* Resource.swift in Sources */,
 				31FBF2BB232DFE32005956DC /* SceneDelegate.swift in Sources */,
 				31FBF2BD232DFE32005956DC /* RootView.swift in Sources */,
+				316F1F7E2358DE5400709C43 /* NavigationExperiments.swift in Sources */,
 				31FDC52B232EDC66002955AB /* ResponseView.swift in Sources */,
 				31FFCA6723307347007A8976 /* HTTPBinView.swift in Sources */,
 				31FFCA6923307498007A8976 /* SheetExperimentsView.swift in Sources */,

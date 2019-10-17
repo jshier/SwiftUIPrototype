@@ -11,6 +11,8 @@ import Combine
 import SwiftUI
 
 struct RootView: View {
+    
+    
     var body: some View {
         NavigationView {
             List {
@@ -20,9 +22,11 @@ struct RootView: View {
                         .environmentObject(SheetState())
                 ) { Text("Sheet Experiments") }
                 NavigationLink(destination: WeatherView()) { Text("Weather") }
+                NavigationLink(destination: NavigationExperiments()) { Text("Navigation") }
             }
             .navigationBarTitle("Prototypes")
         }
+        .environmentObject(NavigationState())
     }
 }
 
