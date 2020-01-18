@@ -11,8 +11,6 @@ import Combine
 import SwiftUI
 
 struct RootView: View {
-    
-    
     var body: some View {
         NavigationView {
             List {
@@ -23,6 +21,9 @@ struct RootView: View {
                 ) { Text("Sheet Experiments") }
                 NavigationLink(destination: WeatherView()) { Text("Weather") }
                 NavigationLink(destination: NavigationExperiments()) { Text("Navigation") }
+                NavigationLink(destination: BindingExperiments()) { Text("Binding Experiments") }
+                NavigationLink(destination: GestureExperiments()) { Text("Gesture Experiments") }
+                NavigationLink(destination: OptionalViewExperiments(optional: "two")) { Text("Optional Experiments") }
             }
             .navigationBarTitle("Prototypes")
         }
@@ -33,6 +34,5 @@ struct RootView: View {
 struct ContentViewPreviews: PreviewProvider {
     static var previews: some View {
         RootView()
-            
     }
 }

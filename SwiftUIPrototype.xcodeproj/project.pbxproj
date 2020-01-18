@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		316F1F7E2358DE5400709C43 /* NavigationExperiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316F1F7D2358DE5400709C43 /* NavigationExperiments.swift */; };
+		31BA92A523722AA300608B91 /* GestureExperiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BA92A423722AA300608B91 /* GestureExperiments.swift */; };
+		31C4F5DD236BD2A60053FA2E /* BindingExperiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C4F5DC236BD2A60053FA2E /* BindingExperiments.swift */; };
 		31C8A176232F032800AF7B65 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C8A175232F032800AF7B65 /* LoginView.swift */; };
 		31C8A178232F052300AF7B65 /* SheetState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C8A177232F052300AF7B65 /* SheetState.swift */; };
+		31CB4AEF23D2626D00F25CD2 /* OptionalViewExperiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CB4AEE23D2626D00F25CD2 /* OptionalViewExperiments.swift */; };
 		31FBF2B9232DFE32005956DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FBF2B8232DFE32005956DC /* AppDelegate.swift */; };
 		31FBF2BB232DFE32005956DC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FBF2BA232DFE32005956DC /* SceneDelegate.swift */; };
 		31FBF2BD232DFE32005956DC /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FBF2BC232DFE32005956DC /* RootView.swift */; };
@@ -46,8 +49,11 @@
 
 /* Begin PBXFileReference section */
 		316F1F7D2358DE5400709C43 /* NavigationExperiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationExperiments.swift; sourceTree = "<group>"; };
+		31BA92A423722AA300608B91 /* GestureExperiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureExperiments.swift; sourceTree = "<group>"; };
+		31C4F5DC236BD2A60053FA2E /* BindingExperiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExperiments.swift; sourceTree = "<group>"; };
 		31C8A175232F032800AF7B65 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		31C8A177232F052300AF7B65 /* SheetState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetState.swift; sourceTree = "<group>"; };
+		31CB4AEE23D2626D00F25CD2 /* OptionalViewExperiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalViewExperiments.swift; sourceTree = "<group>"; };
 		31FBF2B5232DFE32005956DC /* SwiftUIPrototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIPrototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31FBF2B8232DFE32005956DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		31FBF2BA232DFE32005956DC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,9 +125,15 @@
 		31FBF2B7232DFE32005956DC /* SwiftUIPrototype */ = {
 			isa = PBXGroup;
 			children = (
+				31FFCA6B233074BB007A8976 /* App */,
+				31FFCA6A233074A5007A8976 /* Content */,
+				31FBF2C0232DFE33005956DC /* Preview Content */,
+				31C4F5DC236BD2A60053FA2E /* BindingExperiments.swift */,
+				31BA92A423722AA300608B91 /* GestureExperiments.swift */,
 				31FFCA6623307347007A8976 /* HTTPBinView.swift */,
 				31C8A175232F032800AF7B65 /* LoginView.swift */,
 				316F1F7D2358DE5400709C43 /* NavigationExperiments.swift */,
+				31CB4AEE23D2626D00F25CD2 /* OptionalViewExperiments.swift */,
 				31FDC525232ED509002955AB /* RequestView.swift */,
 				31FBF2E8232DFEA9005956DC /* Resource.swift */,
 				31FDC52A232EDC66002955AB /* ResponseView.swift */,
@@ -129,9 +141,6 @@
 				31FFCA6823307498007A8976 /* SheetExperimentsView.swift */,
 				31C8A177232F052300AF7B65 /* SheetState.swift */,
 				31FFCA6C23307822007A8976 /* WeatherView.swift */,
-				31FFCA6B233074BB007A8976 /* App */,
-				31FFCA6A233074A5007A8976 /* Content */,
-				31FBF2C0232DFE33005956DC /* Preview Content */,
 			);
 			path = SwiftUIPrototype;
 			sourceTree = "<group>";
@@ -324,12 +333,15 @@
 				31FBF2B9232DFE32005956DC /* AppDelegate.swift in Sources */,
 				31C8A178232F052300AF7B65 /* SheetState.swift in Sources */,
 				31FBF2E9232DFEA9005956DC /* Resource.swift in Sources */,
+				31BA92A523722AA300608B91 /* GestureExperiments.swift in Sources */,
 				31FBF2BB232DFE32005956DC /* SceneDelegate.swift in Sources */,
 				31FBF2BD232DFE32005956DC /* RootView.swift in Sources */,
 				316F1F7E2358DE5400709C43 /* NavigationExperiments.swift in Sources */,
 				31FDC52B232EDC66002955AB /* ResponseView.swift in Sources */,
+				31C4F5DD236BD2A60053FA2E /* BindingExperiments.swift in Sources */,
 				31FFCA6723307347007A8976 /* HTTPBinView.swift in Sources */,
 				31FFCA6923307498007A8976 /* SheetExperimentsView.swift in Sources */,
+				31CB4AEF23D2626D00F25CD2 /* OptionalViewExperiments.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
