@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		314415D224197A2800894534 /* LayoutExperiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314415D124197A2800894534 /* LayoutExperiments.swift */; };
 		316F1F7E2358DE5400709C43 /* NavigationExperiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316F1F7D2358DE5400709C43 /* NavigationExperiments.swift */; };
 		31BA92A523722AA300608B91 /* GestureExperiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BA92A423722AA300608B91 /* GestureExperiments.swift */; };
 		31C4F5DD236BD2A60053FA2E /* BindingExperiments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C4F5DC236BD2A60053FA2E /* BindingExperiments.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		314415D124197A2800894534 /* LayoutExperiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutExperiments.swift; sourceTree = "<group>"; };
 		316F1F7D2358DE5400709C43 /* NavigationExperiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationExperiments.swift; sourceTree = "<group>"; };
 		31BA92A423722AA300608B91 /* GestureExperiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureExperiments.swift; sourceTree = "<group>"; };
 		31C4F5DC236BD2A60053FA2E /* BindingExperiments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingExperiments.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				31C4F5DC236BD2A60053FA2E /* BindingExperiments.swift */,
 				31BA92A423722AA300608B91 /* GestureExperiments.swift */,
 				31FFCA6623307347007A8976 /* HTTPBinView.swift */,
+				314415D124197A2800894534 /* LayoutExperiments.swift */,
 				31C8A175232F032800AF7B65 /* LoginView.swift */,
 				316F1F7D2358DE5400709C43 /* NavigationExperiments.swift */,
 				31CB4AEE23D2626D00F25CD2 /* OptionalViewExperiments.swift */,
@@ -331,6 +334,7 @@
 				31FDC526232ED509002955AB /* RequestView.swift in Sources */,
 				31C8A176232F032800AF7B65 /* LoginView.swift in Sources */,
 				31FBF2B9232DFE32005956DC /* AppDelegate.swift in Sources */,
+				314415D224197A2800894534 /* LayoutExperiments.swift in Sources */,
 				31C8A178232F052300AF7B65 /* SheetState.swift in Sources */,
 				31FBF2E9232DFEA9005956DC /* Resource.swift in Sources */,
 				31BA92A523722AA300608B91 /* GestureExperiments.swift in Sources */,
